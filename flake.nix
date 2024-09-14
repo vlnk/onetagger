@@ -16,14 +16,14 @@
 
       in rec {
         # For `nix build` & `nix run`:
-        packages = [
-          onetagger.client
-          onetagger.server
-        ];
+        packages = {
+          onetagger = onetagger;
+        };
 
         # For `nix develop` (optional, can be skipped):
         devShell = pkgs.mkShell {
-          nativeBuildInputs = with pkgs; [ rustc cargo ];
+          nativeBuildInputs = with pkgs; [ rustc cargo lld autogen alsa-lib pkg-config  openssl libgcc glib];
+          buildInputs = with pkgs; [nodejs pnpm curl gnumake pango cairo gdk-pixbuf gtk3 libsoup webkitgtk_4_1];
         };
       }
     );
